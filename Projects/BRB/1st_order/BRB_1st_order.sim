@@ -1,0 +1,1017 @@
+!!!Example input file for CENPy building simulation software v.1.0 under Python environment developed by Pengyuan Shen at University of Pennsylvania
+
+$Basics:
+
+Weather File: C:\RCBldEng_v4\Weather\USA_PA_Philadelphia-NE.Philadelphia.AP.724085_TMY3.epw !!! only supports .epw file, the file should be under \\Weather_Files\\
+Building Name: BRB	!!! specify the building name
+Building Type: 2 	!!! 1. residential, 2. commercial, 3. industrial
+Terrain Class: 3 	!!! 1. open terrain, 2. country 3. urban/city
+Ground Type: 1 	!!! 1. clay or silt, 2. sand or gravel 3. homogeneous rock
+Monthly Ground Surface Temperature: 8.35, 10.3, 16.41, 18.49, 22.64, 24.9, 25.33, 26.43, 24.4, 20.14, 15.72, 10.48
+Floors: 14	!!! number of floors
+Building Height: 53.34 !!! unit: m
+Building Length: 70 	!!! unit: m
+Building Width: 27.2 	!!! unit: m
+Building Area: 33118.6	!!! unit: m 
+Envelope Heat Capacity Type: -	!!! Cm in unit (J/K m2), 1:10000, 2: 15000, 3: 25000, 4: 40000, 5: 60000, 6: 80000, 7: 115000, 8: 165000, 9: 260000, 10: 300000; 11. 370000, if '-' is used, envelope heat capacity should be given
+Envelope Heat Capacity: 2200000 	!!! unit: J/K m2, if '-' is used in "Envelope Heat Capacity Type", then this parameter should be given
+Effective Mass Area: 10	!!! Unit: area per floor area, if '-' is used in "Envelope Heat Capacity Type", then this parameter should be given
+
+$Indoor Temperature Setpoint Schedules: 	!!! in the form of [From hour To hour, WD_Tset_heat, WE_Tset_heat, WD_Tset_cool, WE_Tset_cool], note: full day is from 0 to 24 
+
+Schedule Name: stpt		!!! specify the schedule name
+From 0 To 6: 22.22, 22.22, 28, 28
+From 6 To 7: 22.22, 22.22, 28, 28
+From 7 To 9: 23.22, 23.22, 26, 28
+From 9 To 13: 23.22, 23.22, 26, 28
+From 13 To 21: 23.22, 23.22, 26, 28
+From 21 To 24: 22.22, 22.22, 28, 28
+
+Schedule Name: constant_setpoint_1 	!!! specify the schedule name
+From 0 To 24: 22.2, 22.22, 22.22, 22.22
+
+Schedule Name: constant_setpoint_2 	!!! specify the schedule name
+From 0 To 24: 22.22, 22.22, 22.5, 22.5
+
+Schedule Name: constant_setpoint_3 	!!! specify the schedule name
+From 0 To 24: 22.22, 22.22, 24.5, 24.5
+
+$Building Use Schedules:	!!! in the form of [From hour To hour, Occ_WD, Occ_WE, App_WD, App_WE, Light_WD, Light_WE, HVAC_WD, HVAC_WE, INFL_WD, INFL_WE]
+
+Schedule Name: use_sched	!!! specify the zone name, must be one designated in previous Building Zone Information
+From 0 To 5: 0.5,0.3,0.84,0.82,0.84,0.82,1,1,1,1
+From 5 To 6: 0.5,0.3,0.85,0.8,0.85,0.8,1,1,1,1
+From 6 To 7: 0.7,0.4,0.91,0.84,0.91,0.84,1,1,1,1
+From 7 To 8: 0.7,0.5,0.92,0.84,0.92,0.84,1,1,1,1
+From 8 To 12: 0.95,0.5,0.99,0.84,0.99,0.84,1,1,1,1
+From 12 To 13: 0.7,0.5,0.98,0.84,0.98,0.84,1,1,1,1
+From 13 To 17: 0.95,0.5,0.97,0.84,0.97,0.84,1,1,1,1
+From 17 To 18: 0.7,0.3,0.95,0.84,0.95,0.84,1,1,1,1
+From 18 To 19: 0.5,0.3,0.93,0.83,0.93,0.83,1,1,1,1
+From 19 To 20: 0.5,0.3,0.91,0.83,0.91,0.83,1,1,1,1
+From 20 To 22: 0.5,0.3,0.9,0.83,0.9,0.83,1,1,1,1
+From 22 To 24: 0.5,0.3,0.86,0.79,0.86,0.79,1,1,1,1
+
+Schedule Name: use_sched_1	!!! specify the zone name, must be one designated in previous Building Zone Information
+From 0 To 5: 0.5,0.3,0.72,0.51,0.72,0.51,1,1,1,1
+From 5 To 6: 0.5,0.3,0.73,0.55,0.73,0.55,1,1,1,1
+From 6 To 7: 0.7,0.4,0.78,0.58,0.78,0.58,1,1,1,1
+From 7 To 8: 0.7,0.5,0.82,0.62,0.82,0.62,1,1,1,1
+From 8 To 12: 0.95,0.5,0.82,0.62,0.82,0.62,1,1,1,1
+From 12 To 13: 0.7,0.5,0.83,0.63,0.83,0.63,1,1,1,1
+From 13 To 17: 0.95,0.5,0.84,0.64,0.84,0.64,1,1,1,1
+From 17 To 18: 0.7,0.3,0.75,0.65,0.75,0.65,1,1,1,1
+From 18 To 19: 0.5,0.3,0.73,0.63,0.73,0.63,1,1,1,1
+From 19 To 20: 0.5,0.3,0.73,0.58,0.73,0.58,1,1,1,1
+From 20 To 22: 0.5,0.3,0.72,0.54,0.72,0.54,1,1,1,1
+From 22 To 24: 0.5,0.3,0.71,0.51,0.71,0.51,1,1,1,1
+
+Schedule Name: unused	!!! specify the zone name, must be one designated in previous Building Zone Information
+From 0 To 24: 0, 0, 1, 1, 0.5, 0.5, 0, 0, 1, 1 
+
+$Monthly Schedules: 
+
+Schedule Name: infl_month
+From 0 to 2: 1.05
+From 2 to 3: 1
+From 3 to 5: 1.2
+From 5 to 8: 1.2
+From 8 to 10: 1.4
+From 10 to 11: 1.0
+From 11 to 12: 1.1
+
+Schedule Name: stpt_month
+From 0 to 3: stpt
+From 3 to 7: constant_setpoint_1
+From 7 to 10: constant_setpoint_2
+From 10 to 12: constant_setpoint_3
+
+Schedule Name: use_month
+From 0 to 12: use_sched_1
+
+Schedule Name: unuse_month 	!!! specify each month's use schedule
+From 0 To 12: unused
+
+
+$External Wall Materials: !!! U-value, absorption coefficient, emissivity
+Opaque_1: 1.8, 0.8, 0.8
+
+
+$Internal Wall Materials: !!! U-value, absorption coefficient, emissivity
+Opaque_2: 2, 0.5, 0.5
+
+
+$Window Materials: !!! U-value, emissivity, SHGC	
+Window_1: 3.40468, 0.75, 0.53
+Window_2: -,-,-
+
+
+$Roof Materials: !!! U-value, absorption coefficient, emissivity
+Roof_1: 1.720956, 0.8, 0.8
+Roof_2: -,-,-
+
+
+$External Floor Materials: 	!!! U-value including internal and external insulation 	#0.307
+Slab_1: 1.093082
+
+
+$Internal Floor Materials: 	!!! U-value including internal and external insulation 	#0.307
+Slab_2: 2
+
+
+$Envelope Setting:
+
+Surface Name: NW_facing_floor 	!!! Specify the envelope setting name
+Opaque_1 Area: 119 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: 49 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: NW_facing_floor_2 	!!! Specify the envelope setting name
+Opaque_1 Area: 90 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: NW_facing_floor_top 	!!! Specify the envelope setting name
+Opaque_1 Area: 178.5 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: 48 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: NE_facing_floor 	!!! Specify the envelope setting name
+Opaque_1 Area: 22.512 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: 112.56 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: NE_facing_floor_top 	!!! Specify the envelope setting name
+Opaque_1 Area: 68 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: 67.54 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: NE_facing_floor_1 	!!! Specify the envelope setting name
+Opaque_1 Area: 12.512 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: 72.56 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: NE_facing_floor_2 	!!! Specify the envelope setting name
+Opaque_1 Area: 270 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: SE_facing_floor 	!!! Specify the envelope setting name
+Opaque_1 Area: 145.54 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: 32.64 	!!! unit: m2	
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: 50 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: SE_facing_floor_2 	!!! Specify the envelope setting name
+Opaque_1 Area: 95 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2	
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: 80 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all other
+
+Surface Name: SE_facing_floor_top 	!!! Specify the envelope setting name
+Opaque_1 Area: 60 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2	
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: 10 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all other
+
+Surface Name: SW_facing_floor 	!!! Specify the envelope setting name
+Opaque_1 Area: 311.35 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: 121.16 	!!! unit: m2	
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: 20 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: SW_facing_floor_2 	!!! Specify the envelope setting name
+Opaque_1 Area: 270 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2	
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: SW_facing_floor_top 	!!! Specify the envelope setting name
+Opaque_1 Area: 136 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2	
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: SE_facing_floor_skirt 	!!! Specify the envelope setting name
+Opaque_1 Area: 116.5 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: 116.5 	!!! unit: m2	
+Window_1 Overhang Angle: 60 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: NE_facing_floor_skirt 	!!! Specify the envelope setting name
+Opaque_1 Area: 123 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: 80 	!!! unit: m2	
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: 60 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: NW_facing_floor_skirt 	!!! Specify the envelope setting name
+Opaque_1 Area: 232 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2	
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: roof_top 	!!!Specify the envelope setting name
+Roof_1 Area: 2184 	!!! unit: m2
+Roof_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60, caution: there is no overhang for roof, thus it should be left with '-'
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60,  caution: there is no overhang for roof, thus it should be left with '-'
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: roof_skirt_core 	!!!Specify the envelope setting name
+Roof_1 Area: 330 	!!! unit: m2
+Roof_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60, caution: there is no overhang for roof, thus it should be left with '-'
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60,  caution: there is no overhang for roof, thus it should be left with '-'
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: roof_skirt_perimeter 	!!!Specify the envelope setting name
+Roof_1 Area: 611.36 	!!! unit: m2
+Roof_2 Area: - 	!!! unit: m2
+Window_1 Area: - 	!!! unit: m2
+Window_1 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60, caution: there is no overhang for roof, thus it should be left with '-'
+Window_1 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_1 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_1 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_1 Shading Where: - 	!!! 1. inside: internal shading, 2. outside: external shading
+Window_1 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+Window_2 Area: - 	!!! unit: m2
+Window_2 Overhang Angle: - 	!!! unit: degree, can choose from 30, 45, 60,  caution: there is no overhang for roof, thus it should be left with '-'
+Window_2 Fin Angle: - 	!!! unit: degree, can choose from 30, 45, 60
+Window_2 Horizon Angle: - 	!!! unit: degree, can choose from 10, 20, 30, 40, 50, 60, 70, 80
+Window_2 Shading Type: - 	!!! 1. white blinds, 2. white curtains, 3. colored textures, 4. aluminum-coated texture
+Window_2 Shading Where: - 	!!! inside: internal shading, outside: external shading
+Window_2 Shading Control: - 	!!! 1. manually controlled, 2. automated control, 3. all others
+
+Surface Name: underground_wall 	!!! specify the envelope setting name
+Opaque_1 Area: - 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Slab_1 Area: 3875   	!!! unit: m2 
+Slab_2 Area: 0   	!!! unit: m2
+
+Surface Name: skirt_core_slab 	!!! specify the envelope setting name
+Opaque_1 Area: - 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Slab_1 Area: 330   	!!! unit: m2 
+Slab_2 Area: 0   	!!! unit: m2
+
+Surface Name: skirt_perimeter_slab 	!!! specify the envelope setting name
+Opaque_1 Area: - 	!!! unit: m2
+Opaque_2 Area: - 	!!! unit: m2
+Slab_1 Area: 611.36   	!!! unit: m2 
+Slab_2 Area: 0   	!!! unit: m2
+
+
+$HVAC:
+
+HVAC Name: VAV
+Reheat Used in Summer: 1 	!!! 1. yes, 2. no
+Reheat Temperature Delta: 3.2 
+Reheat Used in Winter: 2 	!!! 1. yes, 2. no
+Heating Nominal Efficiency: 1
+Heating COP100: 1 	!!! Relative efficiency for 100% load
+Heating COP80: 1 	!!! Relative efficiency for 80% load
+Heating COP60: 1 	!!! Relative efficiency for 60% load
+Heating COP40: 1 	!!! Relative efficiency for 40% load
+Heating COP20: 1 	!!! Relative efficiency for 0% load
+Heating COP0: 1 	!!! Relative efficiency for 20% load
+Cooling Nominal COP: 1
+Cooling COP100: 1 	!!! Relative COP for 100% load
+Cooling COP80: 1 	!!! Relative COP for 80% load
+Cooling COP60: 1 	!!! Relative COP for 60% load
+Cooling COP40: 1		!!! Relative COP for 40% load
+Cooling COP20: 1 	!!! Relative COP for 20% load
+Cooling COP0: 1 	!!! Relative COP for 0% load
+HVAC System Type: 22	!!! Refer to HVAC system type table
+Heat Recovery Type: 1 	!!! 1. no heat recovery, 2. heat change plates or pipes, 3. two-element-system, 4. loading cold with air-conditioning, 5. heat pipes, 6. slow rotating or intermittent heat exchanger
+Exhaust Air Recirculation Type: 1 	!!! 1. no exhaust air recirculation, 2. exhaust air recirculation 20%, 3. exhaust air recirculation 40%, 4. exhaust air recirculation 60%
+Heating Capacity: -     !!! Define the heating capacity of the HVAC system, in kW, if '-' used then, the capacity if unlimited
+Cooling Capacity: -     !!! Define the cooling capacity of the HVAC system, in kW, if '-' used then, the capacity if unlimited
+Design Heating Supply Air Temperature: 50	!!! determine the heating supply air temperature in Celsius, if left '-', default value will be used, unit: Celsius
+Design Cooling Supply Air Temperature: 12	!!! determine the heating supply air temperature in Celsius, if left '-', default value will be used, unit: Celsius
+Design Heating Hot Water Supply Temperature: 82 	!!! unit: Celsius
+Design Heating Hot Water Return Temperature: 71 	!!! unit: Celsius
+Design Cooling Chilled Water Supply Temperature: - 	!!! unit: Celsius
+Design Cooling Chilled Water Return Temperature: - 	!!! unit: Celsius
+Specific Fan Power: 84 	!!! unit: W/(m3/s)
+Fan Flow Control Factor: 1.0 	!!! average control reduction factor
+
+$Lighting Setting:
+
+Lighting Name: light 	!!!specify the 
+Lighting Load: 16		!!! unit: W/m2
+Parasitic Lighting Energy: 0	!!! unit: kWh/m2/yr, leave it '-' will use default value
+Daylighting Factor: 1 	!!! No Control: 1, Range (0=< factor =<1)
+Lighting Occupancy Factor: 1 	!!! No Control: 1, Range (0=< factor =<1)	
+Lighting Illumination Control Factor: 1 	!!! No Control: 1, Range (0=< factor =<1)
+
+
+$Zones: !!! (specify each zone information in turn)
+
+Zone Name: floor_1_perimeter 	!!! specify the zone name
+Length: 70 	!!! unit: m
+Width: 27.2 	!!! unit: m
+Area: 1816	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 1.02 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 1	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+Northeast Facing External Facade Setting: NE_facing_floor_1 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southeast Facing External Facade Setting: SE_facing_floor_2 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southweast Facing External Facade Setting: SW_facing_floor_2 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Northwest Facing External Facade Setting: NW_facing_floor_2 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_1_core, 327.6; floor_1_skirt_perimeter, 770 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_2, 1816	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_base, 1816 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_1_core	!!! specify the zone name
+Length: 36.8 	!!! unit: m
+Width: 10 	!!! unit: m
+Area: 368	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 0 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 2	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+South Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+East Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+North Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+West Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_1_perimeter, 327.6 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_2, 368	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_base, 368 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_1_skirt_perimeter 	!!! specify the zone name
+Length: 33.62 	!!! unit: m
+Width: 28 	!!! unit: m
+Area: 811.36	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 1.02 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 2	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+Northeast Facing External Facade Setting: NE_facing_floor_skirt 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southeast Facing External Facade Setting: SE_facing_floor_skirt 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southweast Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Northwest Facing External Facade Setting: NW_facing_floor_skirt 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: roof_skirt_perimeter 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: skirt_perimeter_slab 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_1_skirt_core, 80.5; floor_1_perimeter, 770 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: -	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: ground, 611.36 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_1_skirt_core	!!! specify the zone name
+Length: 13 	!!! unit: m
+Width: 10 	!!! unit: m
+Area: 130	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 0 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 2	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+South Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+East Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+North Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+West Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: roof_skirt_core 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: skirt_core_slab 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_1_skirt_perimeter, 80.5 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: -	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: ground, 330 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_base 	!!! specify the zone name
+Length: 70 	!!! unit: m
+Width: 27.2 	!!! unit: m
+Area: 2184	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 0 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 1	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+Northeast Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southeast Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southweast Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Northwest Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: underground_wall 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: - 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_1_perimeter, 1816; floor_1_core, 368	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: ground, 3875 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_2 	!!! specify the zone name
+Length: 70 	!!! unit: m
+Width: 27.2 	!!! unit: m
+Area: 1904	!!! unit: m2
+Height: 7	!!! unit: m
+Occupancy: 1000	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 25		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 1.02 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 0 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: unuse_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 1	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+Northeast Facing External Facade Setting: NE_facing_floor_2 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southeast Facing External Facade Setting: SE_facing_floor_2 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southweast Facing External Facade Setting: SW_facing_floor_2 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Northwest Facing External Facade Setting: NW_facing_floor_2 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: - 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_3_perimeter, 1816; floor_3_core, 368 	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_1_perimeter, 1816; floor_1_core, 368 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_3_perimeter 	!!! specify the zone name
+Length: 70 	!!! unit: m
+Width: 27.2 	!!! unit: m
+Area: 1816	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 1.02 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 1	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+Northeast Facing External Facade Setting: NE_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southeast Facing External Facade Setting: SE_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southweast Facing External Facade Setting: SW_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Northwest Facing External Facade Setting: NW_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_3_core, 327.6 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_m_perimeter, 1816	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_2, 1816 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_3_core	!!! specify the zone name
+Length: 48 	!!! unit: m
+Width: 16 	!!! unit: m
+Area: 368	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 0 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 1	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+South Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+East Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+North Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+West Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_3_perimeter, 327.6 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_m_core, 368	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_2, 368 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_m_perimeter 	!!! specify the zone name
+Length: 70 	!!! unit: m
+Width: 27.2 	!!! unit: m
+Area: 1816	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 1.02 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 9	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+Northeast Facing External Facade Setting: NE_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southeast Facing External Facade Setting: SE_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southweast Facing External Facade Setting: SW_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Northwest Facing External Facade Setting: NW_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_m_core, 327.6 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_13_perimeter, 1816	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_3_perimeter, 1816 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_m_core	!!! specify the zone name
+Length: 48 	!!! unit: m
+Width: 16 	!!! unit: m
+Area: 368	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 0 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 9	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+South Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+East Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+North Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+West Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_m_perimeter, 327.6 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_13_core, 368	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_3_core, 368 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_13_perimeter 	!!! specify the zone name
+Length: 70 	!!! unit: m
+Width: 27.2 	!!! unit: m
+Area: 1816	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 1.02 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 1	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+Northeast Facing External Facade Setting: NE_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southeast Facing External Facade Setting: SE_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southweast Facing External Facade Setting: SW_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Northwest Facing External Facade Setting: NW_facing_floor 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_13_core, 327.6 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_roof, 1816	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_m_perimeter, 1816 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_13_core	!!! specify the zone name
+Length: 48 	!!! unit: m
+Width: 16 	!!! unit: m
+Area: 368	!!! unit: m2
+Height: 3.5	!!! unit: m
+Occupancy: 19	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 80		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 0 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 90 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: use_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 1	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+South Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+East Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+North Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+West Facing External Facade Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: floor_13_perimeter, 327.6 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: floor_roof, 368	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_m_core, 368 	!!!specify the name of neigboring zone and contact area
+
+Zone Name: floor_roof	!!! specify the zone name
+Length: 45 	!!! unit: m
+Width: 34.2 	!!! unit: m
+Area: 2184	!!! unit: m2
+Height: 3.8	!!! unit: m
+Occupancy: 500	!!! unit: m2/person 
+Metabolic Rate: 120	!!! unit: W/person
+Appliance: 25		!!! W/m2
+Lighting Template: light 	!!!specify a predefined lighting system
+Outdoor Air: 2.5	!!! unit: liter/s/person. If ignored, then mininum outdoor air default will be used
+Air Infiltration Level: - 	!!! 1. low, 2. medium, 3. High
+Air Infiltration Rate: 1.02 	!!! leave blank if air infiltration level is used, unit: /h air change rate at Q4Pa
+Air Infiltration Schedule: infl_month 	!!! specify a predefined monthly air infiltration schedule
+Ventilation Type: 1 	!!! 1. Mechanical vent only, 2. Mechanical vent shared w/ Natural, 3. Natural vent only. Note: zones that don't have external structures can't apply natural ventilation
+Night Flushing: 2 	!!! 1. Yes, 2. No
+Window Area Open Percentage: 0 	!!! if natural ventilation is used, specify the opened area percentage of total window area, unit: %
+Angle of Opening: 0 	!!! if natural ventilation is used, specify the angle of opening for bottom hung windows, unit: degree
+DHW: 0 		!!! unit: liter/m2/month
+Indoor Temperature Setpoint Schedule: stpt_month 	!!!specify a predefined indoor temperature setpoint schedule
+Building Use Schedule: unuse_month 	!!!specify a predefined building use schedule
+HVAC Template: VAV 	!!!specify a predefined HVAC system
+Multiplier: 1	!!! If ignored, floor number will be used as multiplier of this zone
+Interior Floor Material: Slab_2 	!!!specify the material of interior floor, for the 1st floor, leave it '-'
+Interior Wall Material: Opaque_2 	!!!specify the material of interior wall, which is defined in wall materials
+Northeast Facing External Facade Setting: NE_facing_floor_top 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southeast Facing External Facade Setting: SE_facing_floor_top 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Southweast Facing External Facade Setting: SW_facing_floor_top 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Northwest Facing External Facade Setting: NW_facing_floor_top 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Roof Setting: roof_top 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Ground Slab Setting: - 	!!!specify the external facade defined in envelope settings, use '-' if there is not external structure
+Adjacent Wall Zone Name and Contact Area: - 	!!!specify the name of neigboring zone and contact area
+Adjacent Ceiling Zone Name and Contact Area: -	!!!specify the name of neigboring zone and contact area
+Adjacent Floor Zone Name and Contact Area: floor_13_perimeter, 1816; floor_13_core, 368 	!!!specify the name of neigboring zone and contact area
+
+
+
+$DHW: 	!!! domestic hot water
+
+DHW Distribution System: 1 	!!! 1. taps within 3m from heat generation, 2. taps more than 3m from heat generation, 3. circulation system or unknown
+DHW Generation System: 3 	!!! 1. electric generation, 2. VR-boiler, 3. gas_boiler or HR-boiler, 4. co-generation, 5. district heating, 6. heat pump, 7. steam
+
+$Pumps: !!! pump use information
+
+Heating Use Pump Power Per Water Flow Rate: 255487 	!!! unit: W-s/m3
+Cooling Use Pump Power Per Water Flow Rate: - 	!!! unit: W-s/m3
+DHW Use Pump Power Per Water Flow Rate: 127739 	!!! unit: W-s/m3
+DHW Use Peak Flow Rate: 0.000054 	!!! unit: m3/s
+Pump Control Type: 3 	!!! 1. no pump used, 2. automatic control more than 50%, 3. all other case
+
+
+$BEM: 	!!! Building Energy Management System
+
+BEM Type: 1 	!!! 1. Class D: No building automation function,  2. Class C: adapting the operation of the building and technical systems to users needs, 3. Class B: optimizing the operation by the tuning of the different controllers and standard alarming and monitoring functions, 4. Class A: detecting faults of building and technical systems and providing support to the diagnosis of these faults, Reporting information regarding energy consumption, indoor conditions, and possibilities for improvement
+
+$PV: !!! Building Integrated PV System
+
+PV Surface Area: 0 	!!! unit: m2
+PV Orientation: SE 	!!! specify the orientation: S, SE, E, NE, N, NW, W, SW
+PV Angle: 30 	!!! unit: degree
+PV Type: 1 	!!! 1. mono crystalline silicona, 2. multi crystalline silicona, 3. thin film amorphous silicon, 4. other thin film layers, 5. thin film copper-indium-gallium-diselenide, 6. thin film cadmium-telloride
+PV Ventilation Type: 1 	!!! 1. unventilated modules, 2. moderately ventilated modules, 3. strongly ventilated modules
+
+$SWH: 	!!! Solar Water Heating System:
+
+SWH Area: 0 	!!! unit: m2
+SWH Orientation: S 	!!! specify the orientation: S, SE, E, NE, N, NW, W, SW
+SWH Angle: 30 	!!! unit: degree
+
+$Wind Turbines:
+
+Wind Turbine Number: 0
+Wind Turbine Diameter: 5 	!!! unit: m
+Wind Turbine Efficiency: 0.4 	!!! 
+
+$Energy Sources:
+
+Heating Energy Source: 4 	!!! 1. electricity, 2. natural gas, 3. district cooling, 4. district heating, 5. steam, 6. all others
+Cooling Energy Source: 3 	!!! 1. electricity, 2. natural gas, 3. district cooling, 4. district heating, 5. steam, 6. all others
+DHW Energy Source: 4 	!!! 1. electricity, 2. natural gas, 3. district cooling, 4. district heating, 5. steam, 6. all others
