@@ -1,6 +1,6 @@
 # RCBldEng (RC Building Energy Model)
 
-RCBldEng is a building energy simulation tool that employs a Resistor-Capacitor (RC) network approach to model thermal dynamics, developed by Pengyuan Shen from Shenzhen International Graduate School of Tsinghua University. The program supports both first order (7R1C) and second order (7R2C) thermal networks to simulate building energy performance. Key features include:
+RCBldEng is a building energy simulation tool that employs a Resistor-Capacitor (RC) network approach to model thermal dynamics, developed by Pengyuan Shen from Shenzhen International Graduate School of Tsinghua University. The program supports RC based thermal network modeling to simulate building energy performance. Key features include:
 
 ## Key Features
 
@@ -60,20 +60,20 @@ Parent_Directory/
 3. Run using the following syntax:
 
     ```
-    RCBldEng.exe [building_name] [model_order] [first_day] -sim [run_code]
+    RCBldEng.exe [building_name] [first_day] -sim [run_code]
     ```
 
     **Example:**
 
     ```
-    RCBldEng.exe office_Shanghai 1 mon -sim test
+    RCBldEng.exe office_Shanghai mon -sim test
     ```
 
 ## Command Line Arguments and Keyword Arguments
 
 **Required Arguments:**
 
-`RCBldEng.exe [building_name] [model_order] [first_day] -sim [run_code]`
+`RCBldEng.exe [building_name] [first_day] -sim [run_code]`
 
 **Keyword Arguments:**
 
@@ -98,7 +98,7 @@ Parent_Directory/
 
 **Example with kwargs:**
 
-`RCBldEng.exe office_Shanghai 1 sun -sim test solver=runge-kutta if_pmv=True infl_style=real`
+`RCBldEng.exe office_commercial_shanghai_v1 mon -sim test01 solver=runge-kutta if_pmv=True infl_style=real`
 
 ## Output Files
 
