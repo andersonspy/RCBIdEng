@@ -12,7 +12,7 @@ Floors: 3	!!! number of floors
 Building Height: 11.89 !!! unit: m
 Building Length: 49.91 	!!! unit: m
 Building Width: 33.27 	!!! unit: m
-Building Area: 1660.73 	!!! unit: m 
+Ground Floor Area: 1660.73 	!!! unit: m 
 Envelope Heat Capacity Type: -	!!! Cm in unit (J/K m2), 1:10000, 2: 15000, 3: 25000, 4: 40000, 5: 60000, 6: 80000, 7: 115000, 8: 165000, 9: 260000, 10: 300000; 11. 370000, if '-' is used, envelope heat capacity should be given
 Envelope Heat Capacity: 180000 	!!! unit: J/K m2, if '-' is used in "Envelope Heat Capacity Type", then this parameter should be given
 Effective Mass Area: 0.8	!!! Unit: area per floor area, if '-' is used in "Envelope Heat Capacity Type", then this parameter should be given
