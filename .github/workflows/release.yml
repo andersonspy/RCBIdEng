@@ -1,0 +1,59 @@
+name: Create Release on Push
+
+on:
+  push:
+    branches:
+      - main # 监听 main 分支
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 需要写权限来创建/更新 Release
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+
+      # 1. 获取提交信息并写入输出变量
+      - name: 提取最新提交信息
+        id: extract_commit_message
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMIT_MSG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      # 2. 提取版本号（如有需求可以保留，否则可省略）
+      - name: 提取版本号
+        id: extract_version
+        run: |
+          # 如果 commit message 中包含形如 "Release vX.Y.Z" 可用正则提取，否则可按需修改
+          VERSION=$(echo "${{ steps.extract_commit_message.outputs.COMMIT_MESSAGE }}" | grep -oE 'Release v[0-9]+\.[0-9]+\.[0-9]+' | awk -F 'v' '{print $2}')
+          if [[ -z "$VERSION" ]]; then
+            echo "::error::无法从提交信息中提取版本号。请确保提交信息含有类似 'Release vX.Y.Z' 的标记。"
+            exit 1
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: 设置版本环境变量
+        run: echo "RELEASE_VERSION=${{ steps.extract_version.outputs.VERSION }}" >> $GITHUB_ENV
+
+      # 3. 打包整个仓库为 {仓库名}-{版本号}.zip
+      - name: 打包仓库
+        run: |
+          PROJECT_NAME=$(basename "$GITHUB_REPOSITORY")
+          zip -r "${PROJECT_NAME}-v${RELEASE_VERSION}.zip" . -x "*.git*" "__pycache__*" "*.github*" ".github*"
+
+      # 4. 创建并上传 Release（使用 softprops/action-gh-release）
+      - name: 创建并上传 Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "v${{ steps.extract_version.outputs.VERSION }}"
+          name: "Release v${{ steps.extract_version.outputs.VERSION }}"
+          body: |
+            **This submission includes:**
+            ${{ steps.extract_commit_message.outputs.COMMIT_MESSAGE }}
+          files: "${{ github.event.repository.name }}-v${{ steps.extract_version.outputs.VERSION }}.zip"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
