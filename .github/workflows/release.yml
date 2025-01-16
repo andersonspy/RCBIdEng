@@ -24,12 +24,24 @@ jobs:
           echo "$COMMIT_MSG" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      # 2. 提取版本号（如有需求可以保留，否则可省略）
+      # 2. 检查是否包含 "Release vX.Y.Z" 字样
+      - name: 检查是否包含 Release
+        id: check_release
+        run: |
+          if echo "${{ steps.extract_commit_message.outputs.COMMIT_MESSAGE }}" | grep -Eq 'Release v[0-9]+\.[0-9]+\.[0-9]+'; then
+            echo "IS_RELEASE=true" >> $GITHUB_OUTPUT
+          else
+            echo "IS_RELEASE=false" >> $GITHUB_OUTPUT
+          fi
+
+      # 3. 提取版本号（仅当 IS_RELEASE == true 时才执行）
       - name: 提取版本号
         id: extract_version
+        if: ${{ steps.check_release.outputs.IS_RELEASE == 'true' }}
         run: |
-          # 如果 commit message 中包含形如 "Release vX.Y.Z" 可用正则提取，否则可按需修改
-          VERSION=$(echo "${{ steps.extract_commit_message.outputs.COMMIT_MESSAGE }}" | grep -oE 'Release v[0-9]+\.[0-9]+\.[0-9]+' | awk -F 'v' '{print $2}')
+          VERSION=$(echo "${{ steps.extract_commit_message.outputs.COMMIT_MESSAGE }}" \
+                    | grep -oE 'Release v[0-9]+\.[0-9]+\.[0-9]+' \
+                    | awk -F 'v' '{print $2}')
           if [[ -z "$VERSION" ]]; then
             echo "::error::无法从提交信息中提取版本号。请确保提交信息含有类似 'Release vX.Y.Z' 的标记。"
             exit 1
@@ -37,16 +49,19 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
       - name: 设置版本环境变量
+        if: ${{ steps.check_release.outputs.IS_RELEASE == 'true' }}
         run: echo "RELEASE_VERSION=${{ steps.extract_version.outputs.VERSION }}" >> $GITHUB_ENV
 
-      # 3. 打包整个仓库为 {仓库名}-{版本号}.zip
+      # 4. 打包仓库（仅当 IS_RELEASE == true 时才执行）
       - name: 打包仓库
+        if: ${{ steps.check_release.outputs.IS_RELEASE == 'true' }}
         run: |
           PROJECT_NAME=$(basename "$GITHUB_REPOSITORY")
           zip -r "${PROJECT_NAME}-v${RELEASE_VERSION}.zip" . -x "*.git*" "__pycache__*" "*.github*" ".github*"
 
-      # 4. 创建并上传 Release（使用 softprops/action-gh-release）
+      # 5. 创建并上传 Release（仅当 IS_RELEASE == true 时才执行）
       - name: 创建并上传 Release
+        if: ${{ steps.check_release.outputs.IS_RELEASE == 'true' }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: "v${{ steps.extract_version.outputs.VERSION }}"
